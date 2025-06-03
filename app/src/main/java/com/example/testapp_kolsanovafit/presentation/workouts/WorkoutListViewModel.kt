@@ -37,6 +37,7 @@ class WorkoutListViewModel @Inject constructor(
             result.fold(
                 onSuccess = { workouts ->
                     allWorkouts = workouts
+                    applyFiltersAndSearch()
                 },
                 onFailure = { error ->
                     _uiState.value = WorkoutListUiState.Error("Ошибка загрузки ${error.message}")

@@ -1,12 +1,15 @@
 package com.example.testapp_kolsanovafit.presentation.workouts
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.Visibility
 import com.example.testapp_kolsanovafit.R
 import com.example.testapp_kolsanovafit.databinding.ItemWorkoutBinding
 import com.example.testapp_kolsanovafit.domain.models.Workout
@@ -37,8 +40,19 @@ class WorkoutsAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(workout: Workout) {
             binding.textViewTitle.text = workout.title
-            binding.textViewDescription.text = workout.description
-            binding.textViewDuration.text = workout.duration
+
+            if (workout.description == null) {
+                binding.textViewDescription.visibility = View.GONE
+            } else {
+                binding.textViewDescription.text = workout.description
+            }
+
+            if (workout.duration != "workout") {
+                binding.textViewDuration.visibility = View.VISIBLE
+                binding.textViewDuration.text = "${workout.duration} минут"
+            } else {
+                binding.textViewDuration.visibility = View.GONE
+            }
 
             setupWorkoutTypeStyles(workout.type)
 
@@ -59,7 +73,7 @@ class WorkoutsAdapter(
 
                     binding.textViewWorkoutType.setTextColor(typeColor)
                     setDurationBackground(binding.textViewDuration, typeColor)
-                    setDrawableColor(binding.textViewWorkoutType, typeColor)
+                    setDrawableColor(binding.textViewWorkoutType, R.color.workoutColor)
                 }
                 WorkoutType.LIVE -> {
                     binding.textViewWorkoutType.text = "Прямой эфир"
@@ -69,7 +83,7 @@ class WorkoutsAdapter(
 
                     binding.textViewWorkoutType.setTextColor(typeColor)
                     setDurationBackground(binding.textViewDuration, typeColor)
-                    setDrawableColor(binding.textViewWorkoutType, typeColor)
+                    setDrawableColor(binding.textViewWorkoutType, R.color.workoutLiveColor)
                 }
                 WorkoutType.COMPLEX -> {
                     binding.textViewWorkoutType.text = "Комплекс"
@@ -79,19 +93,26 @@ class WorkoutsAdapter(
 
                     binding.textViewWorkoutType.setTextColor(typeColor)
                     setDurationBackground(binding.textViewDuration, typeColor)
-                    setDrawableColor(binding.textViewWorkoutType, typeColor)
+                    setDrawableColor(binding.textViewWorkoutType, R.color.workoutComplexColor)
                 }
             }
         }
 
-        private fun setDrawableColor(textView: android.widget.TextView, colorRes: Int) {
+        private fun setDrawableColor(textView: android.widget.TextView, @ColorRes colorRes: Int) {
             val context = textView.context
             val color = ContextCompat.getColor(context, colorRes)
 
-            val drawables = textView.compoundDrawables
-            drawables[0]?.let { drawable ->
-                val wrappedDrawable = DrawableCompat.wrap(drawable.mutate())
-                DrawableCompat.setTint(wrappedDrawable, color)
+            val drawables = textView.compoundDrawablesRelative
+            val drawableStart = drawables[0].mutate()
+
+            drawableStart?.let {
+                DrawableCompat.setTint(it, color)
+
+                textView.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    it,
+                    drawables[1],
+                    drawables[2],
+                    drawables[3])
             }
         }
 
