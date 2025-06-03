@@ -9,4 +9,6 @@
 
     <color name="titleTextColor">#FF262626</color>
     <color name="descriptionTextColor">#FF727272</color>
+
+    <color name="errorColor">#FFA43131</color>
 </resources>

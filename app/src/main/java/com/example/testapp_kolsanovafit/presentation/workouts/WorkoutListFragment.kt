@@ -20,6 +20,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testapp_kolsanovafit.R
 import com.example.testapp_kolsanovafit.WorkoutApplication
@@ -67,8 +68,6 @@ class WorkoutListFragment : Fragment() {
         observeUiState()
     }
 
-
-
     private fun setupMenu() {
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object: MenuProvider {
@@ -89,12 +88,6 @@ class WorkoutListFragment : Fragment() {
                     }
 
                 })
-
-                val searchText = searchView.findViewById<androidx.appcompat.widget.SearchView.SearchAutoComplete>(
-                    androidx.appcompat.R.id.search_src_text
-                )
-
-                searchText?.setTextColor(Color.WHITE)
 
                 searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
                     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -119,7 +112,9 @@ class WorkoutListFragment : Fragment() {
 
     private fun setupRecyclerView() {
         adapter = WorkoutsAdapter { workout ->
-
+            val action = WorkoutListFragmentDirections
+                .actionWorkoutListFragmentToWorkoutDetailsFragment(workout)
+            findNavController().navigate(action)
         }
 
         binding.recyclerViewWorkouts.layoutManager = LinearLayoutManager(requireContext())
