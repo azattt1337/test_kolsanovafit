@@ -1,5 +1,6 @@
 package com.example.testapp_kolsanovafit.di
 
+import com.example.testapp_kolsanovafit.presentation.workouts.WorkoutListFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -7,9 +8,12 @@ import javax.inject.Singleton
 @Component(
     modules = [
         NetworkModule::class,
-        RepositoryModule::class
+        RepositoryModule::class,
+        ViewModelModule::class
     ]
 )
 interface AppComponent {
+
+    fun inject(fragment: WorkoutListFragment)
 
 }

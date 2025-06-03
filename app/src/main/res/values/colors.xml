@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="workoutColor">#FF45AA99</color>
+    <color name="workoutLiveColor">#FFAF4739</color>
+    <color name="workoutComplexColor">#FF226F9F</color>
+
+    <color name="titleTextColor">#FF262626</color>
+    <color name="descriptionTextColor">#FF727272</color>
 </resources>

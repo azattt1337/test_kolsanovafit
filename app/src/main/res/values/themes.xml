@@ -6,4 +6,19 @@
     </style>
 
     <style name="Theme.Testapp_kolsanovafit" parent="Base.Theme.Testapp_kolsanovafit" />
+
+    <style name="CustomSearchView" parent="Widget.AppCompat.SearchView">
+        <item name="queryBackground">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+    </style>
+
+    <style name="Widget.App.Toolbar.WhiteIcons" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:titleTextColor">@android:color/white</item>
+        <item name="titleTextColor">@android:color/white</item>
+        <item name="navigationIconTint">@android:color/white</item>
+        <item name="subtitleTextColor">@android:color/white</item>
+        <item name="android:background">#FF79CDBE</item>
+    </style>
+
 </resources>
