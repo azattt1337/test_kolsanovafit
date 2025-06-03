@@ -8,6 +8,22 @@
     <fragment
         android:id="@+id/workoutListFragment"
         android:name="com.example.testapp_kolsanovafit.presentation.workouts.WorkoutListFragment"
-        android:label="WorkoutListFragment" />
+        android:label="WorkoutListFragment" >
+        <action
+            android:id="@+id/action_workoutListFragment_to_workoutDetailsFragment"
+            app:destination="@id/workoutDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/workoutDetailsFragment"
+        android:name="com.example.testapp_kolsanovafit.presentation.player.WorkoutDetailsFragment"
+        android:label="fragment_workout_details"
+        tools:layout="@layout/fragment_workout_details">
+
+        <argument
+            android:name="workout"
+            app:argType="com.example.testapp_kolsanovafit.domain.models.Workout"/>
+
+    </fragment>
 
 </navigation>

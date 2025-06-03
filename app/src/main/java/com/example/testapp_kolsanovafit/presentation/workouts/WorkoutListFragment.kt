@@ -20,6 +20,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testapp_kolsanovafit.R
 import com.example.testapp_kolsanovafit.WorkoutApplication
@@ -111,7 +112,9 @@ class WorkoutListFragment : Fragment() {
 
     private fun setupRecyclerView() {
         adapter = WorkoutsAdapter { workout ->
-
+            val action = WorkoutListFragmentDirections
+                .actionWorkoutListFragmentToWorkoutDetailsFragment(workout)
+            findNavController().navigate(action)
         }
 
         binding.recyclerViewWorkouts.layoutManager = LinearLayoutManager(requireContext())
