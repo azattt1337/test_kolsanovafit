@@ -67,8 +67,6 @@ class WorkoutListFragment : Fragment() {
         observeUiState()
     }
 
-
-
     private fun setupMenu() {
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object: MenuProvider {
@@ -89,12 +87,6 @@ class WorkoutListFragment : Fragment() {
                     }
 
                 })
-
-                val searchText = searchView.findViewById<androidx.appcompat.widget.SearchView.SearchAutoComplete>(
-                    androidx.appcompat.R.id.search_src_text
-                )
-
-                searchText?.setTextColor(Color.WHITE)
 
                 searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
                     override fun onQueryTextSubmit(query: String?): Boolean {
