@@ -1,5 +1,6 @@
 package com.example.testapp_kolsanovafit.presentation.player
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.testapp_kolsanovafit.domain.models.VideoWorkout
@@ -21,12 +22,20 @@ class WorkoutDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             getVideoUseCase(workoutId).fold(
                 onSuccess = { workout ->
-                    _uiState.value = WorkoutDetailsUiState.Success(workout)
+                    if (isValidVideoUrl(workout.videoUrl)) {
+                        _uiState.value = WorkoutDetailsUiState.Success(workout)
+                    } else {
+                        _uiState.value = WorkoutDetailsUiState.Error("Некорректная ссылка")
+                    }
                 },
                 onFailure = { error ->
                     _uiState.value = WorkoutDetailsUiState.Error(error.message ?: "Unknown error")
                 }
             )
         }
+    }
+
+    private fun isValidVideoUrl(url: String): Boolean {
+        return url.startsWith("http")
     }
 }

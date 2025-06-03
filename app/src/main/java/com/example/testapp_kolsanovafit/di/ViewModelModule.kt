@@ -2,6 +2,7 @@ package com.example.testapp_kolsanovafit.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.testapp_kolsanovafit.presentation.player.WorkoutDetailsViewModel
 import com.example.testapp_kolsanovafit.presentation.workouts.WorkoutListViewModel
 import dagger.Binds
 import dagger.MapKey
@@ -24,4 +25,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(WorkoutListViewModel::class)
     abstract fun bindWorkoutListViewModel(viewModel: WorkoutListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(WorkoutDetailsViewModel::class)
+    abstract fun bindWorkoutDetailsViewModel(viewModel: WorkoutDetailsViewModel): ViewModel
 }
