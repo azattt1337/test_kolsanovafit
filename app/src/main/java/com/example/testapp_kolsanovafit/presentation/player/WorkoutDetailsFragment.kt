@@ -21,6 +21,7 @@ import com.example.testapp_kolsanovafit.WorkoutApplication
 import com.example.testapp_kolsanovafit.databinding.FragmentWorkoutDetailsBinding
 import com.example.testapp_kolsanovafit.databinding.FragmentWorkoutListBinding
 import com.example.testapp_kolsanovafit.di.ViewModelFactory
+import com.example.testapp_kolsanovafit.domain.models.Workout
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -59,11 +60,21 @@ class WorkoutDetailsFragment : Fragment() {
 
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
+        setupToolbar(workout)
+        setupWorkoutInfo(workout)
+
+        viewModel.loadVideoWorkout(workout.id)
+        observeVideoUrl(workout.id)
+    }
+
+    private fun setupToolbar(workout: Workout) {
         binding.toolbar.title = workout.title
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
+    }
 
+    private fun setupWorkoutInfo(workout: Workout) {
         binding.textViewTitle.text = workout.title
 
         if (workout.duration == "workout") {
@@ -73,10 +84,6 @@ class WorkoutDetailsFragment : Fragment() {
         }
 
         binding.textViewWorkoutType.text = "Тип: ${workout.type}"
-
-        viewModel.loadVideoWorkout(workout.id)
-
-        observeVideoUrl(workout.id)
     }
 
     private fun observeVideoUrl(workoutId: Int) {
