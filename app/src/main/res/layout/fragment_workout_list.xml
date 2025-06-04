@@ -38,7 +38,7 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Все"
+                android:text="@string/chip_all_workouts"
                 android:checked="true" />
 
             <com.google.android.material.chip.Chip
@@ -46,21 +46,21 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Тренировки" />
+                android:text="@string/chip_workouts" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipLive"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Прямой эфир" />
+                android:text="@string/chip_live_workouts" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipComplex"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Комплексы" />
+                android:text="@string/chip_complex_workouts" />
 
         </com.google.android.material.chip.ChipGroup>
         
@@ -115,7 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Повторить"
+            android:text="@string/repeat_button_text"
             android:visibility="gone" />
 
     </LinearLayout>
